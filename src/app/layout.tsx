@@ -1,4 +1,5 @@
 import "./globals.css";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 export const metadata = {
   title: "VeriBid",
@@ -7,12 +8,16 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
