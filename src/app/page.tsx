@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar/navbar";
+import AuctionHammer from "@/components/hero/auction-hammer";
 import { Gavel } from "lucide-react";
 
 export default function HomePage() {
@@ -6,25 +7,9 @@ export default function HomePage() {
     <main className="min-h-screen relative overflow-hidden">
       
       <Navbar />
+      <AuctionHammer />
 
       {/* BACKGROUND GAVEL */}
-      <div
-        className="
-          absolute
-          inset-0
-          flex
-          items-center
-          justify-center
-          pointer-events-none
-          opacity-10
-        "
-      >
-        <Gavel
-          size={500}
-          strokeWidth={1}
-          className="text-[var(--foreground)]"
-        />
-      </div>
 
       {/* HERO SECTION */}
       <section
