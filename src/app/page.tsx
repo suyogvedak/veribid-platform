@@ -70,17 +70,24 @@ export default function HomePage() {
         <div className="mt-10 flex gap-4">
           
           <button
-            className="
-              px-8 py-4
-              rounded-2xl
-              bg-[var(--primary)]
-              hover:opacity-90
-              transition
-              text-white
-            "
-          >
-            Start Exploring
-          </button>
+  className="
+    px-8 py-4
+    rounded-2xl
+    bg-gradient-to-r
+    from-violet-600
+    to-fuchsia-600
+    text-white
+    font-semibold
+    shadow-lg
+    shadow-violet-500/30
+    hover:scale-105
+    hover:shadow-violet-500/50
+    transition-all
+    duration-300
+  "
+>
+  Start Exploring
+</button>
 
           <button
             className="
