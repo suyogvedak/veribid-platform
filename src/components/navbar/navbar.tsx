@@ -20,19 +20,40 @@ export default function Navbar() {
       <Container>
         <div className="h-20 flex items-center justify-between">
           
-          {/* LOGO */}
           <Link
             href="/"
-            className="text-2xl font-bold tracking-wide"
+            className="
+              text-2xl
+              font-bold
+              tracking-wide
+              text-[var(--foreground)]
+            "
           >
             VeriBid
           </Link>
 
-          {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/">Home</Link>
-            <Link href="/">Explore</Link>
-            <Link href="/">Auctions</Link>
+            
+            <Link
+              href="/"
+              className="text-[var(--foreground)]"
+            >
+              Home
+            </Link>
+
+            <Link
+              href="/"
+              className="text-[var(--foreground)]"
+            >
+              Explore
+            </Link>
+
+            <Link
+              href="/"
+              className="text-[var(--foreground)]"
+            >
+              Auctions
+            </Link>
 
             <ThemeToggle />
 
@@ -41,7 +62,9 @@ export default function Navbar() {
                 px-5 py-2
                 rounded-xl
                 border border-[var(--border)]
-                hover:bg-white/10
+                bg-[var(--card)]
+                text-[var(--foreground)]
+                hover:opacity-80
                 transition
               "
             >
@@ -52,8 +75,9 @@ export default function Navbar() {
               className="
                 px-5 py-2
                 rounded-xl
-                bg-violet-600
-                hover:bg-violet-700
+                bg-[var(--primary)]
+                text-white
+                hover:opacity-90
                 transition
               "
             >
@@ -61,12 +85,12 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* MOBILE MENU */}
           <button
             className="
               md:hidden
               w-10 h-10
               flex items-center justify-center
+              text-[var(--foreground)]
             "
           >
             <Menu />
