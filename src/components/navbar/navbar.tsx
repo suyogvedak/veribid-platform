@@ -72,17 +72,21 @@ export default function Navbar() {
             </button>
 
             <button
-              className="
-                px-5 py-2
-                rounded-xl
-                bg-[var(--primary)]
-                text-white
-                hover:opacity-90
-                transition
-              "
-            >
-              Sign Up
-            </button>
+  className="
+    px-5 py-2
+    rounded-xl
+    bg-black
+    text-white
+    dark:bg-white
+    dark:text-black
+    hover:scale-105
+    transition-all
+    duration-300
+    shadow-lg
+  "
+>
+  Sign Up
+</button>
           </div>
 
           <button

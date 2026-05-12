@@ -1,6 +1,5 @@
 import Navbar from "@/components/navbar/navbar";
 import AuctionHammer from "@/components/hero/auction-hammer";
-import { Gavel } from "lucide-react";
 
 export default function HomePage() {
   return (
