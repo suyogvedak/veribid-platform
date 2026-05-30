@@ -1,61 +1,35 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import {
-  OrbitControls,
-  Environment,
-  Float,
-  useGLTF,
-} from "@react-three/drei";
+import { Suspense } from "react";
 
-function HammerModel() {
-  const model = useGLTF("/models/hammer.glb");
-
-  return (
-    <primitive
-  object={model.scene}
-  scale={5}
-  rotation={[0, Math.PI, 0]}
-  position={[0, -1.5, 0]}
-/>
-  );
-}
+import JudgeHammer from "./JudgeHammer";
 
 export default function HammerScene() {
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
+      
       <Canvas
+        dpr={[1, 1.5]}
         camera={{
-          position: [0, 0, 10],
-          fov: 45,
+        position: [0, 0, 14],
+        fov: 42,
         }}
       >
         {/* LIGHTING */}
-        <ambientLight intensity={2.5} />
+
+        <ambientLight intensity={1.2} />
 
         <directionalLight
           position={[5, 5, 5]}
-          intensity={5}
+          intensity={1.5}
         />
 
-        {/* ENVIRONMENT */}
-        <Environment preset="city" />
+        {/* HAMMER */}
 
-        {/* FLOATING MOTION */}
-        <Float
-          speed={2}
-          rotationIntensity={1}
-          floatIntensity={2}
-        >
-          <HammerModel />
-        </Float>
-
-        {/* CAMERA CONTROL */}
-        <OrbitControls
-          enableZoom={false}
-          autoRotate
-          autoRotateSpeed={1.5}
-        />
+        <Suspense fallback={null}>
+          <JudgeHammer />
+        </Suspense>
       </Canvas>
     </div>
   );
