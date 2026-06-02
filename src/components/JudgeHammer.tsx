@@ -2,45 +2,60 @@
 
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useEffect, useRef } from "react";
-import { Group } from "three";
+
+import * as THREE from "three";
 
 export default function JudgeHammer() {
-  const group = useRef<Group>(null);
+  const group = useRef<THREE.Group>(null);
 
-  // LOAD FINAL GLB
+  // LOAD MODEL
+
   const { scene, animations } = useGLTF(
     "/models/judge-hammer.glb"
   );
 
-  // PLAY BLENDER ANIMATION
+  // LOAD ANIMATIONS
+
   const { actions } = useAnimations(
     animations,
     group
   );
 
-  useEffect(() => {
-    const firstAnimation =
-      Object.values(actions)[0];
+  // PLAY ANIMATION
 
-    if (firstAnimation) {
-      firstAnimation.reset().play();
+  useEffect(() => {
+    if (!actions) return;
+
+    const firstAction =
+      actions[Object.keys(actions)[0]];
+
+    if (firstAction) {
+      firstAction.reset();
+
+      firstAction.fadeIn(0.5);
+
+      firstAction.play();
     }
   }, [actions]);
 
   return (
     <group
-  ref={group}
+      ref={group}
 
-  // MOVE LEFT + SLIGHTLY UP
-  position={[-11, 0, -7]}
+      // POSITION
+      position={[-1.8, -0.8, 0]}
 
-  // KEEP SIZE LARGE
-  scale={0.75}
+      // ROTATION
+      rotation={[0.1, Math.PI, 0]}
 
-  // KEEP OLD DIRECTION
-  rotation={[0.1, Math.PI, 0.25]}
->
+      // SCALE
+      scale={1.8}
+    >
       <primitive object={scene} />
     </group>
   );
 }
+
+// PRELOAD MODEL
+
+useGLTF.preload("/models/judge-hammer.glb");
