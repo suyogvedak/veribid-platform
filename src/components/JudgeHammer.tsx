@@ -1,61 +1,55 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { useEffect, useRef } from "react";
-
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 export default function JudgeHammer() {
   const group = useRef<THREE.Group>(null);
 
   // LOAD MODEL
-
-  const { scene, animations } = useGLTF(
-    "/models/judge-hammer.glb"
-  );
+  const { scene, animations } = useGLTF("/models/judge-hammer.glb");
 
   // LOAD ANIMATIONS
-
-  const { actions } = useAnimations(
-    animations,
-    group
-  );
+  const { actions } = useAnimations(animations, group);
 
   // PLAY ANIMATION
-
   useEffect(() => {
-    if (!actions) return;
-
-    const firstAction =
-      actions[Object.keys(actions)[0]];
-
-    if (firstAction) {
-      firstAction.reset();
-
-      firstAction.fadeIn(0.5);
-
-      firstAction.play();
+    if (actions) {
+      Object.values(actions).forEach((action) => {
+        action?.play();
+      });
     }
   }, [actions]);
 
+  // FLOATING EFFECT
+  useFrame((state) => {
+  if (!group.current) return;
+
+  group.current.rotation.z =
+    Math.sin(state.clock.elapsedTime * 0.25) * 0.01;
+});
+
   return (
     <group
-      ref={group}
+  ref={group}
 
-      // POSITION
-      position={[-1.8, -0.8, 0]}
+  position={[-1.9, -0.2, 0]}
 
-      // ROTATION
-      rotation={[0.1, Math.PI, 0]}
+rotation={[
+  -0.7,
+  2.95,
+  -0.9
+]}
 
-      // SCALE
-      scale={1.8}
-    >
-      <primitive object={scene} />
-    </group>
+
+scale={0.24}
+>
+  <primitive object={scene} />
+</group>
   );
 }
 
 // PRELOAD MODEL
-
 useGLTF.preload("/models/judge-hammer.glb");

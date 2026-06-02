@@ -66,51 +66,43 @@ export default function HomePage() {
         {/* ========================================= */}
 
         
-        <div
-          className="
-          absolute
-          left-[-80px]
-          top-[-80px]
-          w-[700px]
-          h-[700px]
-          z-0
-          overflow-visible
-          pointer-events-none
-          "
-        >
-          <Canvas
-            gl={{ alpha: true }}
+        {/* LEFT HAMMER */}
+{/* LEFT HAMMER */}
+{/* LEFT HAMMER */}
+<div
+  className="
+    absolute
+    left-[20px]
+    top-[40px]
+    w-[520px]
+    h-[520px]
+    z-10
+    pointer-events-none
+  "
+>
+  <Canvas
+    camera={{
+      position: [0, 0, 12],
+      fov: 40,
+    }}
+  >
+    <ambientLight intensity={1.8} />
 
-            style={{
-              background: "transparent",
-            }}
+    <directionalLight
+      position={[5, 5, 5]}
+      intensity={2.5}
+    />
 
-            camera={{
-              position: [0, 0, 8],
-              fov: 40,
-            }}
-          >
-            {/* LIGHTING */}
+    <pointLight
+      position={[-5, 2, 5]}
+      intensity={2}
+    />
 
-            <ambientLight intensity={1.5} />
-
-            <directionalLight
-              position={[5, 5, 5]}
-              intensity={2}
-            />
-
-            <pointLight
-              position={[-5, 3, 5]}
-              intensity={2}
-            />
-
-            {/* HAMMER MODEL */}
-
-            <Suspense fallback={null}>
-              <JudgeHammer />
-            </Suspense>
-          </Canvas>
-        </div>
+    <Suspense fallback={null}>
+      <JudgeHammer />
+    </Suspense>
+  </Canvas>
+</div>
 
         {/* ========================================= */}
         {/* RIGHT SIDE - HERO CONTENT */}
