@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/navbar/navbar";
+import Link from "next/link";
 
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
@@ -206,99 +207,145 @@ export default function HomePage() {
       {/* ========================================= */}
 
       <section
-        className="
-          relative
-          z-10
-          px-10
-          md:px-20
-          pb-32
-        "
-      >
+  className="
+    relative
+    z-10
+    px-10
+    md:px-20
+    pb-32
+  "
+>
+  <div className="text-center mb-12">
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <h2 className="text-5xl font-black">
+      Quick Access
+    </h2>
 
-          {/* CARD 1 */}
+    <p className="mt-4 text-[var(--muted)]">
+      Access important platform tools instantly.
+    </p>
 
-          <div
-            className="
-              rounded-3xl
-              border
-              border-white/10
-              bg-white/5
-              backdrop-blur-xl
-              p-8
-              hover:bg-white/10
-              transition-all
-              duration-300
-            "
-          >
-            <div className="text-5xl mb-6">⚡</div>
+  </div>
 
-            <h3 className="text-2xl font-bold mb-4">
-              Realtime Auctions
-            </h3>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <p className="text-[var(--muted)] leading-relaxed">
-              Experience lightning-fast live bidding with
-              immersive realtime interactions.
-            </p>
-          </div>
+    <Link href="/verification">
+      <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:bg-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
 
-          {/* CARD 2 */}
+        <div className="text-5xl mb-6">✔️</div>
 
-          <div
-            className="
-              rounded-3xl
-              border
-              border-white/10
-              bg-white/5
-              backdrop-blur-xl
-              p-8
-              hover:bg-white/10
-              transition-all
-              duration-300
-            "
-          >
-            <div className="text-5xl mb-6">🔒</div>
+        <h3 className="text-2xl font-bold mb-4">
+          Verification
+        </h3>
 
-            <h3 className="text-2xl font-bold mb-4">
-              Secure Marketplace
-            </h3>
+        <p className="text-[var(--muted)]">
+          Verify sellers and buyers before participating.
+        </p>
 
-            <p className="text-[var(--muted)] leading-relaxed">
-              Advanced protection systems ensure safe and
-              transparent auction experiences.
-            </p>
-          </div>
+      </div>
+    </Link>
 
-          {/* CARD 3 */}
+    <Link href="/dashboard">
+      <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:bg-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
 
-          <div
-            className="
-              rounded-3xl
-              border
-              border-white/10
-              bg-white/5
-              backdrop-blur-xl
-              p-8
-              hover:bg-white/10
-              transition-all
-              duration-300
-            "
-          >
-            <div className="text-5xl mb-6">🌎</div>
+        <div className="text-5xl mb-6">📊</div>
 
-            <h3 className="text-2xl font-bold mb-4">
-              Global Access
-            </h3>
+        <h3 className="text-2xl font-bold mb-4">
+          Dashboard
+        </h3>
 
-            <p className="text-[var(--muted)] leading-relaxed">
-              Connect buyers and sellers worldwide with
-              futuristic digital auction systems.
-            </p>
-          </div>
-        </div>
-      </section>
+        <p className="text-[var(--muted)]">
+          Monitor bids, listings and analytics.
+        </p>
+
+      </div>
+    </Link>
+
+    <Link href="/support">
+      <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:bg-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
+
+        <div className="text-5xl mb-6">🎧</div>
+
+        <h3 className="text-2xl font-bold mb-4">
+          Support
+        </h3>
+
+        <p className="text-[var(--muted)]">
+          Get help regarding auctions and payments.
+        </p>
+
+      </div>
+    </Link>
+
+  </div>
+</section>
+
+<section className="px-10 md:px-20 py-32">
+  <h2 className="text-5xl font-black">
+    Live Auctions
+  </h2>
+
+  <p className="mt-6 text-xl text-[var(--muted)]">
+    Participate in realtime bidding experiences.
+  </p>
+
+  <Link href="/auctions">
+    <button
+      className="
+        mt-10
+        px-8
+        py-4
+        rounded-2xl
+        bg-gradient-to-r
+        from-violet-600
+        to-fuchsia-600
+        text-white
+      "
+    >
+      Explore Auctions
+    </button>
+  </Link>
+</section>
+
+<section className="px-10 md:px-20 py-32">
+  <h2 className="text-5xl font-black">
+    Sell Your Items
+  </h2>
+
+  <p className="mt-6 text-xl text-[var(--muted)]">
+    Create listings and start earning through auctions.
+  </p>
+
+  <Link href="/sell">
+    <button
+      className="
+        mt-10
+        px-8
+        py-4
+        rounded-2xl
+        bg-gradient-to-r
+        from-violet-600
+        to-fuchsia-600
+        text-white
+      "
+    >
+      Start Selling
+    </button>
+  </Link>
+</section>
+
+<section className="px-10 md:px-20 py-32">
+
+  <h2 className="text-5xl font-black">
+    Global Marketplace
+  </h2>
+
+  <p className="mt-6 text-xl text-[var(--muted)] max-w-3xl">
+    Connect with buyers and sellers around the world
+    through a secure and immersive auction ecosystem.
+  </p>
+
+</section>
 
       {/* ========================================= */}
       {/* FOOTER */}
