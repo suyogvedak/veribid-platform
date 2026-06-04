@@ -34,17 +34,14 @@ export default function JudgeHammer() {
   return (
     <group
   ref={group}
+  position={[0.5, 0, 0]}
 
-  position={[-1.9, -0.2, 0]}
-
-rotation={[
-  -0.7,
-  2.95,
-  -0.9
-]}
-
-
-scale={0.24}
+  rotation={[
+    -0.18,
+    2.45,
+    -0.18
+  ]}
+  scale={0.40}
 >
   <primitive object={scene} />
 </group>
