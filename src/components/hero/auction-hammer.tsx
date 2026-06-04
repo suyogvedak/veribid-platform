@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Gavel } from "lucide-react";
 
 export default function AuctionHammer() {
   return (
@@ -12,68 +12,71 @@ export default function AuctionHammer() {
         flex
         items-center
         justify-center
-        pointer-events-none
         overflow-hidden
+        pointer-events-none
+        z-0
       "
     >
       {/* GLOW */}
       <div
         className="
           absolute
-          w-[700px]
-          h-[700px]
+          w-[800px]
+          h-[800px]
+          rounded-full
           bg-violet-500/20
           blur-3xl
-          rounded-full
         "
       />
 
-      {/* HAMMER */}
+      {/* HAMMER ANIMATION */}
       <motion.div
         animate={{
-          rotate: [-35, -35, 0, -35],
-          y: [-100, -100, 20, -100],
+          rotate: [-35, -35, 10, -35],
+          y: [-120, -120, 40, -120],
+          scale: [1, 1, 1.05, 1],
         }}
         transition={{
-          duration: 3,
+          duration: 2.8,
           repeat: Infinity,
           ease: "easeInOut",
-          times: [0, 0.4, 0.6, 1],
+          times: [0, 0.45, 0.6, 1],
         }}
         style={{
           transformOrigin: "top left",
         }}
-        className="
-          relative
-        "
+        className="relative"
       >
-        <Gavel
-          size={500}
-          strokeWidth={1.5}
+        <Image
+          src="/images/hammer.png"
+          alt="Auction Hammer"
+          width={650}
+          height={650}
+          priority
           className="
-            text-violet-500/30
-            drop-shadow-[0_0_40px_rgba(139,92,246,0.6)]
+            opacity-90
+            drop-shadow-[0_0_40px_rgba(139,92,246,0.5)]
           "
         />
       </motion.div>
 
-      {/* IMPACT RING */}
+      {/* IMPACT EFFECT */}
       <motion.div
         animate={{
-          scale: [0, 0, 1.2, 0],
+          scale: [0, 0, 1.5, 0],
           opacity: [0, 0, 0.5, 0],
         }}
         transition={{
-          duration: 3,
+          duration: 2.8,
           repeat: Infinity,
           ease: "easeOut",
-          times: [0, 0.55, 0.65, 1],
+          times: [0, 0.5, 0.65, 1],
         }}
         className="
           absolute
-          bottom-[22%]
-          w-40
-          h-40
+          bottom-[18%]
+          w-52
+          h-52
           rounded-full
           border
           border-violet-400/40
