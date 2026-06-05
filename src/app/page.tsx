@@ -2,6 +2,16 @@
 
 import Navbar from "@/components/navbar/navbar";
 import Link from "next/link";
+import {
+  ShieldCheck,
+  LayoutDashboard,
+  Gavel,
+  BadgeDollarSign,
+  Headset,
+  Globe,
+} from "lucide-react";
+
+import FadeInSection from "@/components/FadeInSection";
 
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
@@ -205,147 +215,338 @@ export default function HomePage() {
       {/* ========================================= */}
       {/* FEATURES SECTION */}
       {/* ========================================= */}
+    
+      <FadeInSection>
 
-      <section
+<section
   className="
     relative
     z-10
     px-10
     md:px-20
-    pb-32
+    py-24
   "
 >
-  <div className="text-center mb-12">
+
+  <h2
+    className="
+      text-5xl
+      font-black
+      text-center
+      mb-12
+    "
+  >
+    Quick Access
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-8">
+
+    {/* Verification */}
+
+    <Link href="/verification">
+
+      <div
+        className="
+          rounded-3xl
+          border
+          border-white/10
+          bg-white/5
+          backdrop-blur-xl
+          p-8
+          hover:bg-white/10
+          hover:scale-105
+          transition-all
+          duration-300
+          cursor-pointer
+        "
+      >
+
+        <ShieldCheck
+          size={70}
+          className="
+            text-[var(--foreground)]
+            mb-6
+            drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]
+          "
+        />
+
+        <h3 className="text-2xl font-bold">
+          Verification
+        </h3>
+
+      </div>
+
+    </Link>
+
+    {/* Dashboard */}
+
+    <Link href="/dashboard">
+
+      <div
+        className="
+          rounded-3xl
+          border
+          border-white/10
+          bg-white/5
+          backdrop-blur-xl
+          p-8
+          hover:bg-white/10
+          hover:scale-105
+          transition-all
+          duration-300
+          cursor-pointer
+        "
+      >
+
+        <LayoutDashboard
+          size={70}
+          className="
+            text-[var(--foreground)]
+            mb-6
+            drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]
+          "
+        />
+
+        <h3 className="text-2xl font-bold">
+          Dashboard
+        </h3>
+
+      </div>
+
+    </Link>
+
+    {/* Support */}
+
+    <Link href="/support">
+
+      <div
+        className="
+          rounded-3xl
+          border
+          border-white/10
+          bg-white/5
+          backdrop-blur-xl
+          p-8
+          hover:bg-white/10
+          hover:scale-105
+          transition-all
+          duration-300
+          cursor-pointer
+        "
+      >
+
+        <Headset
+          size={70}
+          className="
+            text-[var(--foreground)]
+            mb-6
+            drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]
+          "
+        />
+
+        <h3 className="text-2xl font-bold">
+          Support
+        </h3>
+
+      </div>
+
+    </Link>
+
+  </div>
+
+</section>
+
+</FadeInSection>
+
+<FadeInSection>
+
+<section
+  className="
+    px-10
+    md:px-20
+    py-32
+    flex
+    flex-col
+    lg:flex-row
+    items-center
+    gap-20
+  "
+>
+
+  <div className="flex-1 flex justify-center">
+
+    <Gavel
+      size={220}
+      className="
+        text-[var(--foreground)]
+        drop-shadow-[0_0_30px_rgba(139,92,246,0.5)]
+      "
+    />
+
+  </div>
+
+  <div className="flex-1">
 
     <h2 className="text-5xl font-black">
-      Quick Access
+      Live Auctions
     </h2>
 
-    <p className="mt-4 text-[var(--muted)]">
-      Access important platform tools instantly.
+    <p
+      className="
+        mt-6
+        text-xl
+        text-[var(--muted)]
+      "
+    >
+      Participate in realtime bidding sessions and
+      compete with bidders around the world.
+    </p>
+
+    <Link href="/auctions">
+
+      <button
+        className="
+          mt-8
+          px-8
+          py-4
+          rounded-2xl
+          bg-gradient-to-r
+          from-violet-600
+          to-fuchsia-600
+          text-white
+          font-bold
+        "
+      >
+        Explore Auctions
+      </button>
+
+    </Link>
+
+  </div>
+
+</section>
+
+</FadeInSection>
+
+<FadeInSection>
+
+<section
+  className="
+    px-10
+    md:px-20
+    py-32
+    flex
+    flex-col
+    lg:flex-row-reverse
+    items-center
+    gap-20
+  "
+>
+
+  <div className="flex-1 flex justify-center">
+
+    <BadgeDollarSign
+      size={220}
+      className="
+        text-[var(--foreground)]
+        drop-shadow-[0_0_30px_rgba(139,92,246,0.5)]
+      "
+    />
+
+  </div>
+
+  <div className="flex-1">
+
+    <h2 className="text-5xl font-black">
+      Sell Your Items
+    </h2>
+
+    <p
+      className="
+        mt-6
+        text-xl
+        text-[var(--muted)]
+      "
+    >
+      Create professional listings and launch
+      auctions in just a few clicks.
+    </p>
+
+    <Link href="/sell">
+
+      <button
+        className="
+          mt-8
+          px-8
+          py-4
+          rounded-2xl
+          bg-gradient-to-r
+          from-violet-600
+          to-fuchsia-600
+          text-white
+          font-bold
+        "
+      >
+        Start Selling
+      </button>
+
+    </Link>
+
+  </div>
+
+</section>
+
+</FadeInSection>
+
+<FadeInSection>
+
+<section
+  className="
+    px-10
+    md:px-20
+    py-32
+    flex
+    flex-col
+    lg:flex-row
+    items-center
+    gap-20
+  "
+>
+
+  <div className="flex-1 flex justify-center">
+
+    <Globe
+      size={220}
+      className="
+        text-[var(--foreground)]
+        drop-shadow-[0_0_30px_rgba(139,92,246,0.5)]
+      "
+    />
+
+  </div>
+
+  <div className="flex-1">
+
+    <h2 className="text-5xl font-black">
+      Global Marketplace
+    </h2>
+
+    <p
+      className="
+        mt-6
+        text-xl
+        text-[var(--muted)]
+      "
+    >
+      Connect buyers and sellers worldwide through
+      VeriBid's secure auction ecosystem.
     </p>
 
   </div>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-    <Link href="/verification">
-      <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:bg-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-
-        <div className="text-5xl mb-6">✔️</div>
-
-        <h3 className="text-2xl font-bold mb-4">
-          Verification
-        </h3>
-
-        <p className="text-[var(--muted)]">
-          Verify sellers and buyers before participating.
-        </p>
-
-      </div>
-    </Link>
-
-    <Link href="/dashboard">
-      <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:bg-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-
-        <div className="text-5xl mb-6">📊</div>
-
-        <h3 className="text-2xl font-bold mb-4">
-          Dashboard
-        </h3>
-
-        <p className="text-[var(--muted)]">
-          Monitor bids, listings and analytics.
-        </p>
-
-      </div>
-    </Link>
-
-    <Link href="/support">
-      <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:bg-white/10 hover:scale-105 transition-all duration-300 cursor-pointer">
-
-        <div className="text-5xl mb-6">🎧</div>
-
-        <h3 className="text-2xl font-bold mb-4">
-          Support
-        </h3>
-
-        <p className="text-[var(--muted)]">
-          Get help regarding auctions and payments.
-        </p>
-
-      </div>
-    </Link>
-
-  </div>
 </section>
 
-<section className="px-10 md:px-20 py-32">
-  <h2 className="text-5xl font-black">
-    Live Auctions
-  </h2>
-
-  <p className="mt-6 text-xl text-[var(--muted)]">
-    Participate in realtime bidding experiences.
-  </p>
-
-  <Link href="/auctions">
-    <button
-      className="
-        mt-10
-        px-8
-        py-4
-        rounded-2xl
-        bg-gradient-to-r
-        from-violet-600
-        to-fuchsia-600
-        text-white
-      "
-    >
-      Explore Auctions
-    </button>
-  </Link>
-</section>
-
-<section className="px-10 md:px-20 py-32">
-  <h2 className="text-5xl font-black">
-    Sell Your Items
-  </h2>
-
-  <p className="mt-6 text-xl text-[var(--muted)]">
-    Create listings and start earning through auctions.
-  </p>
-
-  <Link href="/sell">
-    <button
-      className="
-        mt-10
-        px-8
-        py-4
-        rounded-2xl
-        bg-gradient-to-r
-        from-violet-600
-        to-fuchsia-600
-        text-white
-      "
-    >
-      Start Selling
-    </button>
-  </Link>
-</section>
-
-<section className="px-10 md:px-20 py-32">
-
-  <h2 className="text-5xl font-black">
-    Global Marketplace
-  </h2>
-
-  <p className="mt-6 text-xl text-[var(--muted)] max-w-3xl">
-    Connect with buyers and sellers around the world
-    through a secure and immersive auction ecosystem.
-  </p>
-
-</section>
+</FadeInSection>
 
       {/* ========================================= */}
       {/* FOOTER */}
