@@ -1,32 +1,62 @@
 import { prisma } from "@/lib/prisma";
-
-import bcrypt from "bcrypt";
-
+import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
-export async function POST(
-  req: Request
-) {
+export async function POST(req: Request) {
   try {
+    const body = await req.json();
+
     const {
       name,
       username,
       email,
       password,
-    } = await req.json();
+    } = body;
 
-    const existingUser =
+    if (
+      !username ||
+      !email ||
+      !password
+    ) {
+      return NextResponse.json(
+        {
+          error: "Missing required fields",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const existingEmail =
       await prisma.user.findUnique({
         where: {
           email,
         },
       });
 
-    if (existingUser) {
+    if (existingEmail) {
       return NextResponse.json(
         {
-          error:
-            "User already exists",
+          error: "Email already exists",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const existingUsername =
+      await prisma.user.findUnique({
+        where: {
+          username,
+        },
+      });
+
+    if (existingUsername) {
+      return NextResponse.json(
+        {
+          error: "Username already exists",
         },
         {
           status: 400,
@@ -35,10 +65,7 @@ export async function POST(
     }
 
     const hashedPassword =
-      await bcrypt.hash(
-        password,
-        10
-      );
+      await bcrypt.hash(password, 10);
 
     const user =
       await prisma.user.create({
@@ -46,24 +73,31 @@ export async function POST(
           name,
           username,
           email,
-          password:
-            hashedPassword,
+          password: hashedPassword,
         },
       });
 
     return NextResponse.json(
-      user,
+      {
+        success: true,
+        user,
+      },
       {
         status: 201,
       }
     );
-  } catch (error) {
+  } catch (error: any) {
+    console.error(
+      "REGISTER ERROR:"
+    );
+
     console.error(error);
 
     return NextResponse.json(
       {
         error:
-          "Something went wrong",
+          error?.message ||
+          "Internal Server Error",
       },
       {
         status: 500,
