@@ -222,20 +222,22 @@ export default function Navbar() {
 
                 {profileOpen && (
                   <div
-                    className="
-                      absolute
-                      top-16
-                      right-0
-                      w-72
-                      rounded-3xl
-                      border
-                      border-[var(--border)]
-                      bg-[var(--card)]
-                      shadow-[0_20px_60px_rgba(0,0,0,0.25)]
-                      overflow-hidden
-                      z-[9999]
-                    "
-                  >
+                className="
+                 absolute
+                 top-16
+                 right-0
+                 w-72
+                 rounded-3xl
+                 border
+                 border-zinc-200
+                 dark:border-zinc-800
+                 bg-white
+                 dark:bg-zinc-900
+                  shadow-[0_20px_60px_rgba(0,0,0,0.35)]
+                  overflow-hidden
+                  z-[9999]
+                "
+              >
 
                     {/* USER INFO */}
 
@@ -244,8 +246,9 @@ export default function Navbar() {
                         px-5
                         py-5
                         border-b
-                        border-[var(--border)]
-                      "
+                       border-zinc-200
+                       dark:border-zinc-800
+                     "
                     >
                       <div className="flex items-center gap-3">
 
@@ -285,7 +288,8 @@ export default function Navbar() {
                           <p
                             className="
                               font-semibold
-                              text-[var(--foreground)]
+                             text-black
+                             dark:text-white
                             "
                           >
                             {session.user?.name}
@@ -294,7 +298,8 @@ export default function Navbar() {
                           <p
                             className="
                               text-xs
-                              text-[var(--muted)]
+                             text-zinc-600
+                             dark:text-zinc-400
                               truncate
                               max-w-[180px]
                             "
@@ -322,12 +327,15 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                        hover:bg-[var(--border)]
+                       hover:bg-zinc-100
+                       dark:hover:bg-zinc-800
                         transition-all
                         duration-300
                         whitespace-nowrap
-                        cursor-pointer
-                        text-[var(--foreground)]
+                       cursor-pointer
+                       text-black
+                       dark:text-white
+
                       "
                     >
                       <User size={18} />
@@ -345,12 +353,14 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                        hover:bg-[var(--border)]
+                       hover:bg-zinc-100
+                       dark:hover:bg-zinc-800
                         transition-all
                         duration-300
                         whitespace-nowrap
-                        cursor-pointer
-                        text-[var(--foreground)]
+                       cursor-pointer
+                       text-black
+                       dark:text-white
                       "
                     >
                       <LayoutDashboard size={18} />
@@ -368,12 +378,14 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                        hover:bg-[var(--border)]
+                       hover:bg-zinc-100
+                       dark:hover:bg-zinc-800
                         transition-all
                         duration-300
                         whitespace-nowrap
-                        cursor-pointer
-                        text-[var(--foreground)]
+                       cursor-pointer
+                       text-black
+                       dark:text-white
                       "
                     >
                       <Gavel size={18} />
@@ -391,12 +403,14 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                        hover:bg-[var(--border)]
+                       hover:bg-zinc-100
+                       dark:hover:bg-zinc-800
                         transition-all
                         duration-300
                         whitespace-nowrap
-                        cursor-pointer
-                        text-[var(--foreground)]
+                       cursor-pointer
+                       text-black
+                       dark:text-white
                       "
                     >
                       <Heart size={18} />
@@ -414,19 +428,21 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                        hover:bg-[var(--border)]
+                       hover:bg-zinc-100
+                       dark:hover:bg-zinc-800
                         transition-all
                         duration-300
                         whitespace-nowrap
                         cursor-pointer
-                        text-[var(--foreground)]
+                       text-black
+                       dark:text-white  
                       "
                     >
                       <ShieldCheck size={18} />
                       Verification
                     </Link>
 
-                    <div className="border-t border-[var(--border)]" />
+                    <div className="border-t border-zinc-200 dark:border-zinc-800" />
 
                     <button
                       onClick={() => {
