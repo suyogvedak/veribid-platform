@@ -10,6 +10,7 @@
   --border: rgba(0, 0, 0, 0.08);
 
   --primary: #7c3aed;
+  --menu-bg: #ffffff;
 }
 
 .dark {
@@ -22,6 +23,7 @@
   --border: rgba(255, 255, 255, 0.08);
 
   --primary: #8b5cf6;
+  --menu-bg: #050816;
 }
 
 html,
