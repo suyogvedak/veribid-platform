@@ -222,33 +222,32 @@ export default function Navbar() {
 
                 {profileOpen && (
                   <div
-                className="
-                 absolute
-                 top-16
-                 right-0
-                 w-72
-                 rounded-3xl
-                 border
-                 border-zinc-200
-                 dark:border-zinc-800
-                 bg-white
-                 dark:bg-zinc-900
-                  shadow-[0_20px_60px_rgba(0,0,0,0.35)]
-                  overflow-hidden
-                  z-[9999]
-                "
-              >
-
+                    className="
+                      absolute
+                      top-14
+                      right-0
+                      w-[340px]
+                      rounded-3xl
+                      overflow-hidden
+                      z-[9999]
+                      shadow-xl
+                      "
+                      style={{
+                        backgroundColor: "var(--menu-bg)",
+                        color: "var(--foreground)",
+                        border: "1px solid var(--border)",
+                      }}         
+                  >
                     {/* USER INFO */}
 
                     <div
                       className="
-                        px-5
+                       px-5
                         py-5
                         border-b
-                       border-zinc-200
-                       dark:border-zinc-800
-                     "
+                       border-zinc-800
+                       dark:border-zinc-300
+                      "
                     >
                       <div className="flex items-center gap-3">
 
@@ -286,29 +285,22 @@ export default function Navbar() {
 
                         <div>
                           <p
-                            className="
-                              font-semibold
-                             text-black
-                             dark:text-white
-                            "
-                          >
-                            {session.user?.name}
-                          </p>
+                          className="font-semibold"
+                          style={{
+                            color: "var(--foreground)",
+                          }}
+                        >
+                          {session.user?.name}
+                        </p>
 
-                          <p
-                            className="
-                              text-xs
-                             text-zinc-600
-                             dark:text-zinc-400
-                              truncate
-                              max-w-[180px]
-                            "
-                          >
-                            {
-                              session.user
-                                ?.email
-                            }
-                          </p>
+                         <p
+                          className="text-xs truncate"
+                          style={{
+                            color: "var(--muted)",
+                          }}
+                        >
+                          {session.user?.email}
+                        </p>
                         </div>
 
                       </div>
@@ -327,16 +319,19 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                       hover:bg-zinc-100
-                       dark:hover:bg-zinc-800
+                       hover:bg-zinc-900
+                       dark:hover:bg-zinc-100
+
                         transition-all
                         duration-300
-                        whitespace-nowrap
-                       cursor-pointer
-                       text-black
-                       dark:text-white
 
+                        whitespace-nowrap
+                        cursor-pointer
+                        
                       "
+                      style={{
+                        color: "var(--foreground)",
+                      }}
                     >
                       <User size={18} />
                       Profile
@@ -353,15 +348,16 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                       hover:bg-zinc-100
-                       dark:hover:bg-zinc-800
+                       hover:bg-zinc-900
+                       dark:hover:bg-zinc-100       
                         transition-all
                         duration-300
                         whitespace-nowrap
                        cursor-pointer
-                       text-black
-                       dark:text-white
                       "
+                      style={{
+                        color: "var(--foreground)",
+                      }}
                     >
                       <LayoutDashboard size={18} />
                       Dashboard
@@ -378,15 +374,19 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                       hover:bg-zinc-100
-                       dark:hover:bg-zinc-800
+
+                       hover:bg-zinc-900
+                       dark:hover:bg-zinc-100
+
                         transition-all
                         duration-300
-                        whitespace-nowrap
+
+                       whitespace-nowrap
                        cursor-pointer
-                       text-black
-                       dark:text-white
-                      "
+                     " 
+                     style={{
+                      color: "var(--foreground)",
+                    }}
                     >
                       <Gavel size={18} />
                       My Auctions
@@ -403,15 +403,16 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                       hover:bg-zinc-100
-                       dark:hover:bg-zinc-800
+                       hover:bg-zinc-900
+                       dark:hover:bg-zinc-100       
                         transition-all
                         duration-300
                         whitespace-nowrap
                        cursor-pointer
-                       text-black
-                       dark:text-white
                       "
+                      style={{
+                        color: "var(--foreground)",
+                      }}
                     >
                       <Heart size={18} />
                       Watchlist
@@ -428,15 +429,19 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                       hover:bg-zinc-100
-                       dark:hover:bg-zinc-800
+
+                       hover:bg-zinc-900
+                       dark:hover:bg-zinc-100
+
                         transition-all
                         duration-300
+
                         whitespace-nowrap
                         cursor-pointer
-                       text-black
-                       dark:text-white  
                       "
+                      style={{
+                        color: "var(--foreground)",
+                      }}
                     >
                       <ShieldCheck size={18} />
                       Verification
