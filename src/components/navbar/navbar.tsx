@@ -319,8 +319,7 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                       hover:bg-zinc-900
-                       dark:hover:bg-zinc-100
+                       hover:bg-[var(--card)]
 
                         transition-all
                         duration-300
@@ -348,8 +347,7 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                       hover:bg-zinc-900
-                       dark:hover:bg-zinc-100       
+                       hover:bg-[var(--card)]      
                         transition-all
                         duration-300
                         whitespace-nowrap
@@ -375,8 +373,7 @@ export default function Navbar() {
                         px-5
                         py-4
 
-                       hover:bg-zinc-900
-                       dark:hover:bg-zinc-100
+                       hover:bg-[var(--card)]
 
                         transition-all
                         duration-300
@@ -403,8 +400,7 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                       hover:bg-zinc-900
-                       dark:hover:bg-zinc-100       
+                       hover:bg-[var(--card)]      
                         transition-all
                         duration-300
                         whitespace-nowrap
@@ -430,8 +426,7 @@ export default function Navbar() {
                         px-5
                         py-4
 
-                       hover:bg-zinc-900
-                       dark:hover:bg-zinc-100
+                       hover:bg-[var(--card)]
 
                         transition-all
                         duration-300
@@ -464,7 +459,7 @@ export default function Navbar() {
                         gap-3
                         px-5
                         py-4
-                        hover:bg-red-500/10
+                        hover:bg-red-500/10chat
                         transition-all
                         duration-300
                         text-red-500
