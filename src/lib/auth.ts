@@ -63,12 +63,13 @@ export const authOptions = {
           email: user.email,
           name: user.name,
           image: user.image,
+          username: user.username,
         };
       },
     }),
   ],
 
-  callbacks: {
+ callbacks: {
   async jwt({
     token,
     user,
@@ -76,8 +77,29 @@ export const authOptions = {
     token: any;
     user: any;
   }) {
+
     if (user) {
       token.id = user.id;
+      token.username =
+        user.username;
+    }
+
+    if (token.email) {
+      const dbUser =
+        await prisma.user.findUnique({
+          where: {
+            email:
+              token.email,
+          },
+        });
+
+      if (dbUser) {
+        token.id =
+          dbUser.id;
+
+        token.username =
+          dbUser.username;
+      }
     }
 
     return token;
@@ -90,17 +112,16 @@ export const authOptions = {
     session: any;
     token: any;
   }) {
+
     if (session.user) {
-      session.user.id = token.id;
+      session.user.id =
+        token.id;
+
+      session.user.username =
+        token.username;
     }
 
     return session;
   },
 },
-
-  pages: {
-    signIn: "/auth/login",
-  },
-
-  secret: process.env.NEXTAUTH_SECRET,
 };
