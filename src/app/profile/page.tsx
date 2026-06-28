@@ -28,6 +28,7 @@ if (!session?.user?.email) {
       bids: true,
       watchlist: true,
       verification: true,
+      accounts: true,
     },
   });
 
@@ -41,7 +42,7 @@ if (!session?.user?.email) {
     user.phoneNumber,
     user.location,
     user.bio,
-    user.avatarUrl,
+    user.image,
   ];
 
   const completedFields =
@@ -51,6 +52,13 @@ if (!session?.user?.email) {
     (completedFields / profileFields.length) * 100
   );
 
+  const accountType =
+  user.accounts.some(
+    (account) =>
+      account.provider === "google"
+  )
+    ? "Google OAuth"
+    : "Email & Password";
   return (
     <>
       <Navbar />
@@ -154,6 +162,23 @@ if (!session?.user?.email) {
                   space-y-4
                 "
               >
+                <div>
+                  <p className="text-sm text-[var(--muted)]">
+                    Username
+                  </p>
+
+                  <p>
+                    @{user.username}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-[var(--muted)]">
+                    Account Type
+                  </p>
+
+                  <p>{accountType}</p>
+                </div>
                 <div>
                   <p className="text-sm text-[var(--muted)]">
                     Email
@@ -342,6 +367,31 @@ if (!session?.user?.email) {
                     />
                   </div>
                 </div>
+              {/* KYC VERIFICATION STATUS */}
+                <div
+                  className="
+                    rounded-3xl
+                    border
+                    border-[var(--border)]
+                    bg-[var(--card)]
+                    p-6
+                  "
+                >
+                  <p className="text-sm text-[var(--muted)]">
+                    KYC Status
+                  </p>
+
+                  <h3
+                    className="
+                      text-2xl
+                      font-bold
+                      mt-2
+                    "
+                  >
+                    {user.verification?.status ??
+                      "Pending"}
+                  </h3>
+                </div>
               </div>
 
               {/* ACCOUNT DETAILS */}
@@ -364,6 +414,22 @@ if (!session?.user?.email) {
                 >
                   Account Details
                 </h2>
+
+                <div>
+                  <p className="text-sm text-[var(--muted)]">
+                    Email
+                  </p>
+
+                  <p>{user.email}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-[var(--muted)]">
+                    Username
+                  </p>
+
+                  <p>@{user.username}</p>
+                </div>
 
                 <div
                   className="
@@ -405,6 +471,57 @@ if (!session?.user?.email) {
 
                     <p>
                       {user.updatedAt.toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            
+             {/* SECURITY CARD */}
+
+
+              <div
+                className="
+                  rounded-3xl
+                  border
+                  border-[var(--border)]
+                  bg-[var(--card)]
+                  p-8
+                "
+              >
+                <h2
+                  className="
+                    text-2xl
+                    font-bold
+                    mb-6
+                  "
+                >
+                  Security
+                </h2>
+
+                <div
+                  className="
+                    grid
+                    md:grid-cols-2
+                    gap-6
+                  "
+                >
+                  <div>
+                    <p className="text-sm text-[var(--muted)]">
+                      Authentication Method
+                    </p>
+
+                    <p>{accountType}</p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-[var(--muted)]">
+                      Password Status
+                    </p>
+
+                    <p>
+                      {user.password
+                        ? "Configured"
+                        : "Managed By Google"}
                     </p>
                   </div>
                 </div>
