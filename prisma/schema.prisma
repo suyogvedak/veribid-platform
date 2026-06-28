@@ -50,6 +50,8 @@ model User {
 
   avatarUrl   String?
 
+  profileCompleted Boolean @default(false)
+
   role       UserRole @default(USER)
 
   isVerified Boolean @default(false)
@@ -185,4 +187,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+
+model PasswordResetToken {
+  id String @id @default(cuid())
+
+  email String
+
+  token String @unique
+
+  expires DateTime
+
+  createdAt DateTime @default(now())
 }
