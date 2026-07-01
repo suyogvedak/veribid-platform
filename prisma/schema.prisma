@@ -51,6 +51,7 @@ model User {
   avatarUrl   String?
 
   profileCompleted Boolean @default(false)
+  passwordCreated Boolean @default(false)
 
   role       UserRole @default(USER)
 
