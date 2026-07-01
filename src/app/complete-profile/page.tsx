@@ -92,6 +92,27 @@ export default function CompleteProfilePage() {
     try {
       setLoading(true);
 
+    if (!username.trim()) {
+  setError(
+    "Username is required"
+  );
+  return;
+}
+
+if (!phoneNumber.trim()) {
+  setError(
+    "Phone Number is required"
+  );
+  return;
+}
+
+if (!location.trim()) {
+  setError(
+    "Location is required"
+  );
+  return;
+}
+
       const response =
         await fetch(
           "/api/profile/complete",
@@ -345,6 +366,57 @@ export default function CompleteProfilePage() {
                   </div>
                 )}
 
+                <div
+                  className="
+                    mb-8
+
+                    rounded-2xl
+
+                    border
+                    border-[var(--border)]
+
+                    p-4
+                  "
+                >
+                  <h3
+                    className="
+                      font-semibold
+                      mb-3
+                    "
+                  >
+                    Required To Continue
+                  </h3>
+
+                  <div
+                    className="
+                      space-y-2
+                      text-sm
+                    "
+                  >
+                    <div>
+                      {username
+                        ? "✓"
+                        : "○"} Username
+                    </div>
+
+                    <div>
+                      {phoneNumber
+                        ? "✓"
+                        : "○"} Phone Number
+                    </div>
+
+                    <div>
+                      {location
+                        ? "✓"
+                        : "○"} Location
+                    </div>
+
+                    <div>
+                      ○ Bio (Optional)
+                    </div>
+                  </div>
+                </div>
+
                 <form
                   onSubmit={
                     handleSubmit
@@ -480,9 +552,10 @@ export default function CompleteProfilePage() {
                     type="submit"
                     disabled={
                       loading ||
-                      usernameAvailable !==
-                        true
-                    }
+                      usernameAvailable !== true ||
+                      !phoneNumber.trim() ||
+                      !location.trim()
+                      }
                     className="
                       py-4
 
@@ -494,16 +567,19 @@ export default function CompleteProfilePage() {
 
                       font-semibold
 
+                      cursor-pointer
+
                       hover:bg-violet-700
 
                       transition-all
 
                       disabled:opacity-50
+                      disabled:cursor-not-allowed
                     "
                   >
                     {loading
                       ? "Saving..."
-                      : "Complete Profile"}
+                      : "Save & Continue"}
                   </button>
                 </form>
               </div>
