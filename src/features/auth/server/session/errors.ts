@@ -1,30 +1,70 @@
+export class AuthError extends Error {
+
+  readonly code: string;
+
+  readonly status: number;
+
+  constructor(
+    code: string,
+    message: string,
+    status = 400
+  ) {
+
+    super(message);
+
+    this.code = code;
+
+    this.status = status;
+
+  }
+
+}
+
 export const AUTH_ERRORS = {
+
   UNAUTHORIZED: {
+
     code: "UNAUTHORIZED",
 
-    message: "You must be logged in.",
+    message:
+      "You must be logged in.",
+
+    status: 401,
+
   },
 
   FORBIDDEN: {
+
     code: "FORBIDDEN",
 
     message:
-      "You don't have permission to perform this action.",
+      "You don't have permission.",
+
+    status: 403,
+
   },
 
   USER_NOT_FOUND: {
+
     code: "USER_NOT_FOUND",
 
-    message: "Authenticated user not found.",
+    message:
+      "User not found.",
+
+    status: 404,
+
   },
 
   SESSION_EMAIL_MISSING: {
-    code: "SESSION_EMAIL_MISSING",
+
+    code:
+      "SESSION_EMAIL_MISSING",
 
     message:
-      "Authenticated session does not contain an email address.",
-  },
-} as const;
+      "Authenticated session does not contain an email.",
 
-export type AuthErrorCode =
-  keyof typeof AUTH_ERRORS;
+    status: 500,
+
+  },
+
+} as const;
