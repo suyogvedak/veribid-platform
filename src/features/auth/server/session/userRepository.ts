@@ -472,7 +472,7 @@ export class UserRepository {
   /**
    * Find linked provider account.
    */
-  static async findAccount(
+  static async findProviderAccount(
     provider: string,
     providerAccountId: string
   ) {
@@ -526,7 +526,7 @@ export class UserRepository {
   /**
    * Link authentication provider.
    */
-  static async linkProvider(
+  static async createProviderLink(
     data: Prisma.AccountCreateInput
   ) {
 
