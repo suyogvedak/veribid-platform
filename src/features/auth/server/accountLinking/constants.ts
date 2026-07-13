@@ -1,13 +1,36 @@
 /**
- * Account Linking Constants
+ * Supported authentication providers.
  */
 
-export const ACCOUNT_LINKING = {
+export const AUTH_PROVIDERS = {
 
-  MAX_LINKED_PROVIDERS: 5,
+  GOOGLE: "google",
 
-  GOOGLE_PROVIDER: "google",
+  CREDENTIALS: "credentials",
 
-  CREDENTIALS_PROVIDER: "credentials",
+} as const;
+
+/**
+ * Account linking configuration.
+ */
+
+export const ACCOUNT_LINKING_CONFIG = {
+
+  /**
+   * Sync OAuth profile picture
+   * whenever the user logs in.
+   */
+  SYNC_PROFILE_IMAGE: true,
+
+  /**
+   * Sync OAuth display name.
+   */
+  SYNC_PROFILE_NAME: true,
+
+  /**
+   * Automatically create
+   * provider accounts.
+   */
+  AUTO_LINK_PROVIDER: true,
 
 } as const;
