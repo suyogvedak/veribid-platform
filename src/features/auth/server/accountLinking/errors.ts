@@ -1,38 +1,72 @@
+export class AccountLinkingError
+  extends Error {
+
+  readonly code: string;
+
+  readonly status: number;
+
+  constructor(
+    code: string,
+    message: string,
+    status = 400
+  ) {
+
+    super(message);
+
+    this.code = code;
+
+    this.status = status;
+
+  }
+
+}
+
 export const ACCOUNT_LINKING_ERRORS = {
 
-  EMAIL_ALREADY_IN_USE: {
+  USER_NOT_FOUND: {
 
-    code: "EMAIL_ALREADY_IN_USE",
+    code: "USER_NOT_FOUND",
 
     message:
-      "An account already exists with this email.",
+      "User not found.",
+
+    status: 404,
+
+  },
+
+  EMAIL_ALREADY_EXISTS: {
+
+    code:
+      "EMAIL_ALREADY_EXISTS",
+
+    message:
+      "An account with this email already exists.",
+
+    status: 409,
 
   },
 
   PROVIDER_ALREADY_LINKED: {
 
-    code: "PROVIDER_ALREADY_LINKED",
+    code:
+      "PROVIDER_ALREADY_LINKED",
 
     message:
-      "This provider is already linked.",
+      "Authentication provider is already linked.",
+
+    status: 409,
 
   },
 
   PROVIDER_NOT_LINKED: {
 
-    code: "PROVIDER_NOT_LINKED",
+    code:
+      "PROVIDER_NOT_LINKED",
 
     message:
       "Authentication provider is not linked.",
 
-  },
-
-  ACCOUNT_NOT_FOUND: {
-
-    code: "ACCOUNT_NOT_FOUND",
-
-    message:
-      "Account not found.",
+    status: 404,
 
   },
 
