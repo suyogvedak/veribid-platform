@@ -217,4 +217,47 @@ return {
 
   }
 
+  /**
+ * Whether the user
+ * may login.
+ */
+static canLogin(
+  result: AuthenticationResult
+): boolean {
+
+  return true;
+
+}
+
+/**
+ * Whether this is the
+ * user's first login.
+ */
+static isFirstLogin(
+  result: AuthenticationResult
+): boolean {
+
+  return result.isNewUser;
+
+}
+
+/**
+ * Determine redirect path.
+ */
+static getRedirectPath(
+  result: AuthenticationResult
+): string {
+
+  if (
+    result.needsOnboarding
+  ) {
+
+    return "/complete-profile";
+
+  }
+
+  return "/";
+
+}
+
 }
