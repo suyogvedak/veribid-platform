@@ -14,8 +14,10 @@ export interface SignupRequest {
 }
 
 /**
- * Data required to create
- * a new user in the database.
+ * Data required to create a user.
+ *
+ * This represents application-level data,
+ * not the Prisma model itself.
  */
 export interface CreateUserData {
   name: string;
@@ -26,22 +28,28 @@ export interface CreateUserData {
 }
 
 /**
+ * Public user data returned after signup.
+ */
+export type SignupUser = Pick<
+  User,
+  | "id"
+  | "name"
+  | "username"
+  | "email"
+  | "profileCompleted"
+  | "passwordCreated"
+  | "isVerified"
+> & {
+  phone: string | null;
+};
+
+/**
  * Successful signup result.
  */
 export interface SignupResult {
   success: true;
   message: string;
-  user: Pick<
-    User,
-    | "id"
-    | "name"
-    | "username"
-    | "email"
-    | "phone"
-    | "profileCompleted"
-    | "passwordCreated"
-    | "isVerified"
-  >;
+  user: SignupUser;
 }
 
 /**
@@ -54,7 +62,7 @@ export interface SignupFailure {
 }
 
 /**
- * Service response.
+ * Signup service response.
  */
 export type SignupResponse =
   | SignupResult
