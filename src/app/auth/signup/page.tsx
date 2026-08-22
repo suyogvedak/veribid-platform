@@ -60,11 +60,13 @@ export default function SignupPage() {
   const strength =
     evaluatePassword(password);
 
+  // --------------------------------------------
+  // Username availability
+  // --------------------------------------------
+
   useEffect(() => {
     if (username.length < 3) {
-      setUsernameAvailable(
-        null
-      );
+      setUsernameAvailable(null);
 
       return;
     }
@@ -84,7 +86,8 @@ export default function SignupPage() {
                 },
 
                 body: JSON.stringify({
-                  username,
+                  username:
+                    username.trim(),
                 }),
               }
             );
@@ -92,13 +95,18 @@ export default function SignupPage() {
           const data =
             await response.json();
 
+          if (!response.ok) {
+            setUsernameAvailable(null);
+
+            return;
+          }
+
           setUsernameAvailable(
-            data.available
+            data.available === true
           );
+
         } catch {
-          setUsernameAvailable(
-            null
-          );
+          setUsernameAvailable(null);
         }
       }, 500);
 
@@ -106,12 +114,20 @@ export default function SignupPage() {
       clearTimeout(timer);
   }, [username]);
 
+  // --------------------------------------------
+  // Signup
+  // --------------------------------------------
+
   async function handleSignup(
     e: React.FormEvent<HTMLFormElement>
   ) {
     e.preventDefault();
 
     setError("");
+
+    // ------------------------------------------
+    // Terms
+    // ------------------------------------------
 
     if (!acceptTerms) {
       setError(
@@ -121,15 +137,25 @@ export default function SignupPage() {
       return;
     }
 
+    // ------------------------------------------
+    // Username
+    // ------------------------------------------
+
     if (
-      usernameAvailable === false
+      usernameAvailable !== true
     ) {
       setError(
-        "Username already exists."
+        usernameAvailable === false
+          ? "Username already exists."
+          : "Please enter a valid username."
       );
 
       return;
     }
+
+    // ------------------------------------------
+    // Password confirmation
+    // ------------------------------------------
 
     if (
       password !==
@@ -141,6 +167,10 @@ export default function SignupPage() {
 
       return;
     }
+
+    // ------------------------------------------
+    // Password requirements
+    // ------------------------------------------
 
     if (
       password.length < 8
@@ -194,8 +224,10 @@ export default function SignupPage() {
       return;
     }
 
+    // Must match the server-side
+    // PasswordValidator requirement.
     if (
-      strength.score < 2
+      strength.score < 3
     ) {
       setError(
         "Password is too weak."
@@ -204,12 +236,16 @@ export default function SignupPage() {
       return;
     }
 
+    // ------------------------------------------
+    // Submit
+    // ------------------------------------------
+
     try {
       setLoading(true);
 
       const response =
         await fetch(
-          "/api/auth/register",
+          "/api/auth/signup",
           {
             method: "POST",
 
@@ -219,10 +255,19 @@ export default function SignupPage() {
             },
 
             body: JSON.stringify({
-              name,
-              username,
-              email,
+              name:
+                name.trim(),
+
+              username:
+                username.trim(),
+
+              email:
+                email.trim()
+                  .toLowerCase(),
+
               password,
+
+              confirmPassword,
             }),
           }
         );
@@ -230,24 +275,41 @@ export default function SignupPage() {
       const data =
         await response.json();
 
+      // ----------------------------------------
+      // API error
+      // ----------------------------------------
+
       if (!response.ok) {
         setError(
-          data.error ||
+          data.message ||
             "Signup failed."
         );
-
-        setLoading(false);
 
         return;
       }
 
-      router.push(
-        "/auth/login"
+      // ----------------------------------------
+      // Signup successful
+      // ----------------------------------------
+
+      if (data.success) {
+        router.push(
+          "/auth/login"
+        );
+
+        return;
+      }
+
+      setError(
+        data.message ||
+          "Signup failed."
       );
+
     } catch {
       setError(
-        "Something went wrong."
+        "Something went wrong. Please try again."
       );
+
     } finally {
       setLoading(false);
     }
@@ -553,8 +615,9 @@ export default function SignupPage() {
               </div>
             </div>
 
-            {/* RIGHT SIDE FORM STARTS HERE */}
-                        <div
+            {/* RIGHT SIDE FORM */}
+
+            <div
               className="
                 w-full
                 max-w-xl
@@ -688,7 +751,7 @@ export default function SignupPage() {
                           text-sm
                         "
                       >
-                        {usernameAvailable ? (
+                        {usernameAvailable === true ? (
                           <span
                             className="
                               text-green-500
@@ -696,13 +759,21 @@ export default function SignupPage() {
                           >
                             ✓ Username available
                           </span>
-                        ) : (
+                        ) : usernameAvailable === false ? (
                           <span
                             className="
                               text-red-500
                             "
                           >
                             ✗ Username already taken
+                          </span>
+                        ) : (
+                          <span
+                            className="
+                              text-[var(--muted)]
+                            "
+                          >
+                            Checking username...
                           </span>
                         )}
                       </div>
@@ -1056,6 +1127,7 @@ export default function SignupPage() {
                       Login
                     </Link>
                   </p>
+
                 </form>
               </div>
             </div>
