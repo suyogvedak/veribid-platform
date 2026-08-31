@@ -1,22 +1,12 @@
-import type { Prisma, User } from "@prisma/client";
+import type { User } from "@prisma/client";
 
 import { prisma } from "@/lib/prisma";
 
 import {
   DatabaseError,
-} from "../../shared/errors";
-
-import {
   DATABASE_ERRORS,
 } from "../../shared/errors";
 
-/**
- * Data required to create a user.
- *
- * This is intentionally kept local to the
- * repository because it represents the
- * database creation operation.
- */
 export interface SignupUserCreateData {
   name: string;
   username: string;
@@ -25,37 +15,40 @@ export interface SignupUserCreateData {
   password: string;
 }
 
-/**
- * Signup repository.
- *
- * Responsible only for database access
- * required by the signup workflow.
- *
- * Business rules belong in SignupService.
- * Validation belongs in SignupValidator.
- */
 export class SignupRepository {
+
   /**
-   * Check whether an email is already registered.
+   * Check whether an email already exists.
+   *
+   * Emails are normalized before reaching this
+   * repository, but we still normalize here so
+   * this repository remains safe on its own.
    */
   static async emailExists(
     email: string,
   ): Promise<boolean> {
+
     try {
+      const normalizedEmail =
+        email.trim().toLowerCase();
+
       const user =
         await prisma.user.findUnique({
           where: {
-            email,
+            email: normalizedEmail,
           },
+
           select: {
             id: true,
           },
         });
 
       return user !== null;
+
     } catch (error) {
+
       console.error(
-        "[SignupRepository] Failed to check email:",
+        "[SignupRepository] Email lookup failed:",
         error,
       );
 
@@ -66,26 +59,33 @@ export class SignupRepository {
   }
 
   /**
-   * Check whether a username is already registered.
+   * Check whether username already exists.
    */
   static async usernameExists(
     username: string,
   ): Promise<boolean> {
+
     try {
+      const normalizedUsername =
+        username.trim().toLowerCase();
+
       const user =
         await prisma.user.findUnique({
           where: {
-            username,
+            username: normalizedUsername,
           },
+
           select: {
             id: true,
           },
         });
 
       return user !== null;
+
     } catch (error) {
+
       console.error(
-        "[SignupRepository] Failed to check username:",
+        "[SignupRepository] Username lookup failed:",
         error,
       );
 
@@ -96,27 +96,31 @@ export class SignupRepository {
   }
 
   /**
-   * Check whether a phone number is already
-   * associated with an account.
+   * Check whether phone number already exists.
    */
   static async phoneExists(
     phoneNumber: string,
   ): Promise<boolean> {
+
     try {
+
       const user =
         await prisma.user.findFirst({
           where: {
             phoneNumber,
           },
+
           select: {
             id: true,
           },
         });
 
       return user !== null;
+
     } catch (error) {
+
       console.error(
-        "[SignupRepository] Failed to check phone:",
+        "[SignupRepository] Phone lookup failed:",
         error,
       );
 
@@ -128,38 +132,52 @@ export class SignupRepository {
 
   /**
    * Create a new user.
-   *
-   * Password must already be hashed before
-   * this method is called.
    */
   static async createUser(
     data: SignupUserCreateData,
   ): Promise<User> {
+
     try {
+
       const user =
         await prisma.user.create({
           data: {
-            name: data.name,
-            username: data.username,
-            email: data.email,
+            name:
+              data.name.trim(),
+
+            username:
+              data.username
+                .trim()
+                .toLowerCase(),
+
+            email:
+              data.email
+                .trim()
+                .toLowerCase(),
+
             phoneNumber:
               data.phoneNumber ?? null,
-            password: data.password,
 
-            /**
-             * Explicit defaults for the
-             * authentication state.
-             */
-            passwordCreated: true,
-            profileCompleted: false,
-            isVerified: false,
+            password:
+              data.password,
+
+            passwordCreated:
+              true,
+
+            profileCompleted:
+              false,
+
+            isVerified:
+              false,
           },
         });
 
       return user;
+
     } catch (error) {
+
       console.error(
-        "[SignupRepository] Failed to create user:",
+        "[SignupRepository] User creation failed:",
         error,
       );
 
@@ -170,23 +188,24 @@ export class SignupRepository {
   }
 
   /**
-   * Find a newly-created user by ID.
-   *
-   * Useful after registration when the
-   * service needs a clean database record.
+   * Find user by ID.
    */
   static async findUserById(
     id: string,
   ): Promise<User | null> {
+
     try {
+
       return await prisma.user.findUnique({
         where: {
           id,
         },
       });
+
     } catch (error) {
+
       console.error(
-        "[SignupRepository] Failed to find user:",
+        "[SignupRepository] User lookup failed:",
         error,
       );
 
