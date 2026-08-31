@@ -31,37 +31,15 @@ import {
   PasswordService,
 } from "../password";
 
-/**
- * Signup service.
- *
- * Responsible for orchestrating the complete
- * registration workflow.
- *
- * This class does not communicate with Prisma
- * directly and does not contain validation rules.
- */
 export class SignupService {
-  /**
-   * Register a new user.
-   *
-   * Flow:
-   *
-   * 1. Normalize input
-   * 2. Validate input
-   * 3. Check duplicate email
-   * 4. Check duplicate username
-   * 5. Check duplicate phone
-   * 6. Hash password
-   * 7. Create user
-   * 8. Map database result
-   */
+
   static async register(
     request: SignupRequest,
   ): Promise<SignupResponse> {
 
-    // --------------------------------------------------
-    // 1. Normalize input
-    // --------------------------------------------------
+    // --------------------------------------------
+    // Normalize input
+    // --------------------------------------------
 
     const email =
       EmailValidator.normalize(
@@ -86,24 +64,24 @@ export class SignupService {
       name:
         request.name.trim(),
 
-      email,
-
       username,
+
+      email,
 
       phone,
     };
 
-    // --------------------------------------------------
-    // 2. Validate input
-    // --------------------------------------------------
+    // --------------------------------------------
+    // Validate input
+    // --------------------------------------------
 
     await SignupValidator.validate(
       normalizedRequest,
     );
 
-    // --------------------------------------------------
-    // 3. Check duplicate email
-    // --------------------------------------------------
+    // --------------------------------------------
+    // EMAIL DUPLICATE CHECK
+    // --------------------------------------------
 
     const emailExists =
       await SignupRepository.emailExists(
@@ -114,9 +92,9 @@ export class SignupService {
       throw new DuplicateEmailError();
     }
 
-    // --------------------------------------------------
-    // 4. Check duplicate username
-    // --------------------------------------------------
+    // --------------------------------------------
+    // USERNAME DUPLICATE CHECK
+    // --------------------------------------------
 
     const usernameExists =
       await SignupRepository.usernameExists(
@@ -127,9 +105,9 @@ export class SignupService {
       throw new DuplicateUsernameError();
     }
 
-    // --------------------------------------------------
-    // 5. Check duplicate phone
-    // --------------------------------------------------
+    // --------------------------------------------
+    // PHONE DUPLICATE CHECK
+    // --------------------------------------------
 
     if (phone) {
 
@@ -143,18 +121,18 @@ export class SignupService {
       }
     }
 
-    // --------------------------------------------------
-    // 6. Hash password
-    // --------------------------------------------------
+    // --------------------------------------------
+    // HASH PASSWORD
+    // --------------------------------------------
 
     const hashedPassword =
       await PasswordService.hash(
         normalizedRequest.password,
       );
 
-    // --------------------------------------------------
-    // 7. Create database user
-    // --------------------------------------------------
+    // --------------------------------------------
+    // CREATE USER
+    // --------------------------------------------
 
     const user =
       await SignupRepository.createUser({
@@ -171,12 +149,11 @@ export class SignupService {
 
         password:
           hashedPassword,
-
       });
 
-    // --------------------------------------------------
-    // 8. Map database result
-    // --------------------------------------------------
+    // --------------------------------------------
+    // MAP RESPONSE
+    // --------------------------------------------
 
     return SignupMapper.toResult(
       user,
