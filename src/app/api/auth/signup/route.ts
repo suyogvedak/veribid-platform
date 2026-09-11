@@ -5,6 +5,10 @@ import {
 } from "@/features/auth/server/signup";
 
 import {
+  SignupError,
+} from "@/features/auth/server/signup/errors";
+
+import {
   ValidationError,
   DatabaseError,
 } from "@/features/auth/shared/errors";
@@ -70,7 +74,7 @@ export async function POST(
       );
 
     // --------------------------------------------
-    // Successful response
+    // Successful registration
     // --------------------------------------------
 
     return NextResponse.json(
@@ -81,6 +85,24 @@ export async function POST(
     );
 
   } catch (error: unknown) {
+
+    // --------------------------------------------
+    // Signup / business errors
+    // --------------------------------------------
+
+    if (
+      error instanceof SignupError
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: error.message,
+        },
+        {
+          status: 400,
+        },
+      );
+    }
 
     // --------------------------------------------
     // Validation errors
@@ -129,21 +151,10 @@ export async function POST(
     // Unexpected errors
     // --------------------------------------------
 
-    if (error instanceof Error) {
-      console.error(
-        "[Signup API] Unexpected error:",
-        error.message,
-      );
-
-      console.error(
-        error.stack,
-      );
-    } else {
-      console.error(
-        "[Signup API] Unexpected error:",
-        error,
-      );
-    }
+    console.error(
+      "[Signup API] Unexpected error:",
+      error,
+    );
 
     return NextResponse.json(
       {
