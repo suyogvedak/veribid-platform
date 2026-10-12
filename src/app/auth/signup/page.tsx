@@ -282,7 +282,7 @@ export default function SignupPage() {
       if (!response.ok) {
         setError(
           data.message ||
-            "Signup failed."
+          "Signup failed."
         );
 
         return;
@@ -302,7 +302,7 @@ export default function SignupPage() {
 
       setError(
         data.message ||
-          "Signup failed."
+        "Signup failed."
       );
 
     } catch {
@@ -656,27 +656,45 @@ export default function SignupPage() {
                   for verified auctions.
                 </p>
 
+
+
                 {error && (
                   <div
                     className="
                       mb-6
-
                       rounded-2xl
-
-                      border
-                      border-red-500/30
-
+                      border border-red-500/30
                       bg-red-500/10
-
                       p-4
-
-                      text-red-500
                       text-sm
                     "
                   >
-                    {error}
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <p className="text-red-500">
+                        {error}
+                      </p>
+
+                      {error.toLowerCase().includes("email already exists") && (
+                        <Link
+                          href={`/auth/login?email=${encodeURIComponent(
+                            email.trim().toLowerCase()
+                          )}`}
+                          className="
+                            whitespace-nowrap
+                            font-semibold
+                            text-violet-500
+                            hover:text-violet-400
+                            transition-colors
+                          "
+                        >
+                          Continue to Login →
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 )}
+
+
 
                 <form
                   onSubmit={handleSignup}
@@ -867,9 +885,8 @@ export default function SignupPage() {
                               duration-300
                             "
                             style={{
-                              width: `${
-                                (strength.score + 1) * 20
-                              }%`,
+                              width: `${(strength.score + 1) * 20
+                                }%`,
                             }}
                           />
                         </div>
@@ -952,7 +969,7 @@ export default function SignupPage() {
                       "
                     >
                       {password ===
-                      confirmPassword ? (
+                        confirmPassword ? (
                         <span
                           className="
                             text-green-500
